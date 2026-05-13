@@ -8,11 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
-import modelo.Municipio;
-import modelo.Campos;
+import modelos.Campos;
 import util.ConexionBD;
-
 public abstract class DAO {
 	ArrayList<String> tablas= estructura();
 	public ArrayList<String> estructura() {
