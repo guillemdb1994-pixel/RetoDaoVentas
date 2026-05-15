@@ -98,4 +98,18 @@ public class LineaFacturaDAO implements GenericDAO<LineaFactura> {
 		return new LineaFactura(rs.getInt("id"), rs.getInt("cantidad"), rs.getDouble("precio_unitario"),
 				rs.getDouble("importe"), rs.getInt("id_factura"), rs.getInt("id_producto"));
 	}
+	
+	public boolean productoTieneLineas(int idProducto) {
+	    String sql = "SELECT COUNT(*) FROM lineafactura WHERE id_producto = ?";
+	    try (Connection con = ConexionBD.getConnection();
+	         PreparedStatement ps = con.prepareStatement(sql)) {
+	        ps.setInt(1, idProducto);
+	        try (ResultSet rs = ps.executeQuery()) {
+	            if (rs.next()) return rs.getInt(1) > 0;
+	        }
+	    } catch (SQLException e) {
+	        System.err.println("Error comprobando uso de producto: " + e.getMessage());
+	    }
+	    return false;
+	}
 }

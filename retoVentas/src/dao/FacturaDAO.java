@@ -124,4 +124,49 @@ public class FacturaDAO implements GenericDAO<Factura> {
 		return new Factura(rs.getInt("id"), rs.getDate("fecha"), rs.getDouble("subtotal"), rs.getDouble("iva"),
 				rs.getDouble("total"), rs.getInt("id_cliente"), rs.getInt("id_empleado"));
 	}
+
+	public List<Factura> obtenerPorFecha(Date fecha) {
+		List<Factura> lista = new ArrayList<>();
+		String sql = "SELECT * FROM factura WHERE fecha = ?";
+		try (Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setDate(1, fecha);
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next())
+					lista.add(mapear(rs));
+			}
+		} catch (SQLException e) {
+			System.err.println("Error por fecha: " + e.getMessage());
+		}
+		return lista;
+	}
+
+	public List<Factura> obtenerFacturasPorProducto(int idProducto) {
+		List<Factura> lista = new ArrayList<>();
+		String sql = "SELECT DISTINCT f.* FROM factura f JOIN lineafactura l ON f.id = l.id_factura WHERE l.id_producto = ?";
+		try (Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, idProducto);
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next())
+					lista.add(mapear(rs));
+			}
+		} catch (SQLException e) {
+			System.err.println("Error por producto: " + e.getMessage());
+		}
+		return lista;
+	}
+
+	public List<Factura> obtenerPorCliente(int idCliente) {
+		List<Factura> lista = new ArrayList<>();
+		String sql = "SELECT * FROM factura WHERE id_cliente = ?";
+		try (Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, idCliente);
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next())
+					lista.add(mapear(rs));
+			}
+		} catch (SQLException e) {
+			System.err.println("Error por cliente: " + e.getMessage());
+		}
+		return lista;
+	}
 }
