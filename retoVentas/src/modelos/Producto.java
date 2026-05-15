@@ -1,4 +1,4 @@
-package modelo;
+package modelos;
 
 public class Producto {
 	protected int id;
