@@ -11,15 +11,15 @@ public class Factura {
 	public int idCliente;
 	public int idEmpleado;
 
-	public Factura(int id, Date fecha, double subtotal, double iva, double total, int idCliente, int idEmpleado) {
+	public Factura(int id, Date fecha, double subtotal, double iva, double total, int d, int e) {
 		super();
 		this.id = id;
 		this.fecha = fecha;
 		this.subtotal = subtotal;
 		this.iva = iva;
 		this.total = total;
-		this.idCliente = idCliente;
-		this.idEmpleado = idEmpleado;
+		this.idCliente = d;
+		this.idEmpleado = e;
 	}
 
 	public int getId() {
