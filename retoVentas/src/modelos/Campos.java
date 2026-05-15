@@ -1,4 +1,4 @@
-package modelo;
+package modelos;
 
 public class Campos {
 	protected String field;

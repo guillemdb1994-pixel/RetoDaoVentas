@@ -1,6 +1,6 @@
 package modelos;
 
-public class Empleado {
+public class Empleado extends Persona{
 	protected int idEmpleado;
 	protected String puesto;
 	protected Double salario;
