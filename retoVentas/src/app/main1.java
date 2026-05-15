@@ -1,16 +1,20 @@
 package app;
 
-import dao.GenDAO;
+import dao.ClienteDAO;
 import modelos.Cliente;
 
 public class main1 {
+	public static void funcion1(int id) {
+		ClienteDAO cl=new ClienteDAO();
+		for (Cliente c : cl.obtenerTodos()) {
+			System.out.println(c);
+		}
+		System.out.println();
+		System.out.println(cl.obtenerPorId(id));
+	}
 
 	public static void main(String[] args) throws Exception {
-		Cliente c=new Cliente(0,"94959694X","PACO",0,"Calle san blas");
-		System.out.println(c);
-		GenDAO<Cliente> asd=new GenDAO<>("cliente");
-		asd.insertar2(c);
-
+		funcion1(2);
 	}
 
 }
